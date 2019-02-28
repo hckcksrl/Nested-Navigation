@@ -1,23 +1,12 @@
-import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  TextInput,
-  Text,
-  SafeAreaView
-} from "react-native";
-import {
-  createAppContainer,
-  createMaterialTopTabNavigator
-} from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import React from "react";
+import { Dimensions, Text, View } from "react-native";
+import { createMaterialTopTabNavigator } from "react-navigation";
 import Popular from "../../Screen/Home/Popular";
 import Picture from "../../Screen/Home/Picture";
 import Recent from "../../Screen/Home/Recent";
 import Dictionary from "../../Screen/Home/Dictionary";
 
-const topTabNavigator = createMaterialTopTabNavigator(
+const Home = createMaterialTopTabNavigator(
   {
     Popular: {
       screen: Popular,
@@ -53,13 +42,14 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   },
   {
-    order: [Popular, Picture, Dictionary, Recent],
+    lazy: true,
+    initialRouteName: "Popular",
     swipeEnabled: true,
-    animationEnabled: false,
+    animationEnabled: true,
     tabBarOptions: {
       tabStyle: {
-        width: Dimensions.get("window").width / 2,
-        height: Dimensions.get("window").height / 11,
+        width: Dimensions.get("window").width / 4,
+        height: Dimensions.get("window").height / 14,
         justifyContent: "center",
         alignItems: "center"
       },
@@ -77,67 +67,5 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   }
 );
-
-const TopNavigation = createAppContainer(topTabNavigator);
-
-class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      inputholder: "text input"
-    };
-  }
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.icon}>
-              <Icon name="home" color="red" size={30} />
-            </View>
-            <View style={styles.text_input}>
-              <TextInput
-                placeholder={this.state.inputholder}
-                style={{
-                  borderRadius: 10,
-                  backgroundColor: "#f2f2f2",
-                  height: 10,
-                  padding: 20
-                }}
-              />
-            </View>
-          </View>
-          <View style={styles.center}>
-            <TopNavigation />
-          </View>
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    borderBottomWidth: 2,
-    flex: 0.1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center"
-  },
-  icon: {
-    flex: 0.2,
-    alignItems: "center"
-  },
-  text_input: {
-    flex: 1
-  },
-  center: {
-    flex: 1
-  }
-});
 
 export default Home;

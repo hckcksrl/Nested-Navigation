@@ -8,7 +8,7 @@ import Notifi from "../../Screen/Notificate/Notifi";
 import Following from "../../Screen/Notificate/Following";
 import Event from "../../Screen/Notificate/Event";
 
-const topTabNavigator = createMaterialTopTabNavigator(
+const Notificate = createMaterialTopTabNavigator(
   {
     Notificate: {
       screen: Notifi,
@@ -36,12 +36,14 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   },
   {
+    initialRouteName: "Notificate",
+    lazy: true,
     swipeEnabled: true,
     animationEnabled: false,
     tabBarOptions: {
       tabStyle: {
         width: Dimensions.get("window").width / 3,
-        height: Dimensions.get("window").height / 10,
+        height: Dimensions.get("window").height / 14,
         justifyContent: "center",
         alignItems: "center"
       },
@@ -59,24 +61,5 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   }
 );
-
-const TopNavigation = createAppContainer(topTabNavigator);
-
-class Notificate extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* <TopNavigation /> */}
-        <Text>aa</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
 
 export default Notificate;

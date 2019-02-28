@@ -1,10 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
+import { withNavigationFocus } from "react-navigation";
 
-const Profile = () => {
-  <View style={styles.container}>
-    <Text style={styles.text}>프로필</Text>
-  </View>;
+class Profile extends Component {
+  componentDidUpdate() {
+    const { screenProps } = this.props;
+    if (this.props.isFocused) {
+      screenProps(this.props.navigation.state.key);
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>프로필</Text>
+      </View>
+    );
+  }
+}
+Profile.propTypes = {
+  screenProps: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -19,4 +35,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Profile;
+export default withNavigationFocus(Profile);

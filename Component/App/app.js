@@ -1,76 +1,99 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
-import { createAppContainer, createBottomTabNavigator } from "react-navigation";
-import Home from "../Navigation/HomeNavigation";
-import MyPage from "../Navigation/MyPageNavigation";
-import Notificate from "../Navigation/NotificateNavigation";
+import { View, StyleSheet, TextInput, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-
-const tabNavigation = createBottomTabNavigator(
-  {
-    Home: {
-      screen: Home,
-      navigationOptions: {
-        tabBarLabel: "Home"
-        // tabBarIcon: ({ tintColor }) => (
-        //   <Icon name="home" color={tintColor} size={24} />
-        // )
-      }
-    },
-    MyPage: {
-      screen: MyPage,
-      navigationOptions: {
-        tabBarLabel: "MyPage"
-        // tabBarIcon: ({ tintColor }) => (
-        //   <Icon name="contact" color={tintColor} size={24} />
-        // )
-      }
-    },
-    Notification: {
-      screen: Notificate,
-      navigationOptions: {
-        tabBarLabel: "Notificate"
-        // tabBarIcon: ({ tintColor }) => (
-        //   <Icon name="notifications" color={tintColor} size={24} />
-        // )
-      }
-    }
-  }
-  // {
-  //   tabBarOptions: {
-  //     tabStyle: {
-  //       width: Dimensions.get("window").width / 3,
-  //       height: Dimensions.get("window").height / 12,
-  //       justifyContent: "center",
-  //       alignItems: "center"
-  //     },
-  //     activeTintColor: "red",
-  //     inactiveTintColor: "black",
-  //     style: {
-  //       backgroundColor: "black"
-  //     },
-  //     indicatorStyle: { height: 0 },
-  //     showIcon: true,
-  //     upperCaseLabel: false,
-  //     showLabel: false
-  //   }
-  // }
-);
-
-const AppNavigation = createAppContainer(tabNavigation);
+import AppRootNavigator from "../Navigation/RootNavigation";
 
 class AppContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      inputholder: null
+    };
+  }
+
+  handleChange = state => {
+    this.setState({
+      inputholder: state
+    });
+  };
+
+  componentWillMount() {
+    this.handleChange;
+  }
+
   render() {
-    return <AppNavigation />;
+    console.log(this.state.inputholder);
+    return (
+      <SafeAreaView style={styles.container} forceInset={{ top: "never" }}>
+        {this.state.inputholder === "Popular" ||
+        this.state.inputholder === "Picture" ||
+        this.state.inputholder === "Recent" ||
+        this.state.inputholder === "Dictionary" ? (
+          <View style={styles.header}>
+            <View style={styles.icon}>
+              <Icon name="home" color="red" size={30} />
+            </View>
+            <View style={styles.searchSection}>
+              <Icon style={styles.searchIcon} name="search" size={20} />
+              <TextInput
+                style={styles.input}
+                placeholder="검색"
+                onChangeText={searchString => {
+                  this.setState({ searchString });
+                }}
+              />
+            </View>
+            <View style={styles.setting}>
+              <Icon name="settings" size={30} color="grey" />
+            </View>
+          </View>
+        ) : null}
+
+        <AppRootNavigator screenProps={this.handleChange} />
+      </SafeAreaView>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "white"
+  },
+  header: {
+    flex: 0.1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  icon: {
+    flex: 0.2,
     alignItems: "center",
     justifyContent: "center"
+  },
+  searchSection: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#e5e5e5",
+    borderRadius: 10,
+    height: 30
+  },
+  searchIcon: {
+    paddingLeft: 10,
+    flex: 0.15,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  input: {
+    flex: 1,
+    backgroundColor: "transparent",
+    color: "#424242"
+  },
+  setting: {
+    flex: 0.2,
+    alignItems: "center"
   }
 });
 

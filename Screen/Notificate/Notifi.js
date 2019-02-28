@@ -1,10 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
+import { withNavigationFocus } from "react-navigation";
 
-const Notifi = () => {
-  <View style={styles.container}>
-    <Text style={styles.text}>알림</Text>
-  </View>;
+class Notifi extends Component {
+  componentDidUpdate() {
+    const { screenProps } = this.props;
+    if (this.props.isFocused) {
+      screenProps(this.props.navigation.state.key);
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>알림</Text>
+      </View>
+    );
+  }
+}
+Notifi.propTypes = {
+  screenProps: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -19,4 +35,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Notifi;
+export default withNavigationFocus(Notifi);

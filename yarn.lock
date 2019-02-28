@@ -2181,6 +2181,14 @@ expo-camera-interface@~2.0.0:
   dependencies:
     expo-core "~2.0.0"
 
+expo-camera@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-3.0.0.tgz#722e7f7fb47235f10c8505464b0d93838fe8bc04"
+  integrity sha512-Tr+C51HU+YxrLt2UNf+5y/mcVoaCS3iFIolbZyt1nrqEPXsLTzbHrZPLp99HAF22F+hwvVHVUYQGl2wM8T4ZKA==
+  dependencies:
+    lodash.mapvalues "^4.6.0"
+    prop-types "^15.6.0"
+
 expo-camera@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-2.0.0.tgz#ea55105970eff1b5ad858de156fee36b6e5bb632"

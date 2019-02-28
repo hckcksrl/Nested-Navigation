@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
-import {
-  createAppContainer,
-  createMaterialTopTabNavigator
-} from "react-navigation";
+import React from "react";
+import { Dimensions, Text } from "react-native";
+import { createMaterialTopTabNavigator } from "react-navigation";
 import Profile from "../../Screen/MyPage/Profile";
 import Shop from "../../Screen/MyPage/Shop";
 
-const topTabNavigator = createMaterialTopTabNavigator(
+const MyPage = createMaterialTopTabNavigator(
   {
     Profile: {
       screen: Profile,
@@ -27,12 +24,14 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   },
   {
+    lazy: true,
+    initialRouteName: "Profile",
     swipeEnabled: true,
     animationEnabled: false,
     tabBarOptions: {
       tabStyle: {
         width: Dimensions.get("window").width / 2,
-        height: Dimensions.get("window").height / 10,
+        height: Dimensions.get("window").height / 14,
         justifyContent: "center",
         alignItems: "center"
       },
@@ -50,24 +49,5 @@ const topTabNavigator = createMaterialTopTabNavigator(
     }
   }
 );
-
-const TopNavigation = createAppContainer(topTabNavigator);
-
-class MyPage extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* <TopNavigation /> */}
-        <Text>dd</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
 
 export default MyPage;
