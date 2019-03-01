@@ -7,7 +7,7 @@ class Dictionary extends Component {
   componentDidUpdate() {
     const { screenProps } = this.props;
     if (this.props.isFocused) {
-      screenProps(this.props.navigation.state.key);
+      screenProps(this.props.navigation.state.key, this.props.navigation);
     }
   }
 

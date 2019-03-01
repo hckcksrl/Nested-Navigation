@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Permissions, Camera } from "expo";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import PropTypes from "prop-types";
+import { withNavigationFocus } from "react-navigation";
 
-export default class Cameras extends Component {
+class Cameras extends Component {
   constructor() {
     super();
     this.state = {
@@ -123,3 +124,5 @@ const styles = StyleSheet.create({
     margin: 10
   }
 });
+
+export default withNavigationFocus(Cameras);

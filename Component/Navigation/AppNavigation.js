@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, View, TextInput, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "react-navigation";
 import Home from "../Navigation/HomeNavigation";
 import MyPage from "../Navigation/MyPageNavigation";
@@ -69,5 +69,43 @@ const tabNavigation = createBottomTabNavigator(
     }
   }
 );
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 0.1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  icon: {
+    flex: 0.2,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  searchSection: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#e5e5e5",
+    borderRadius: 10,
+    height: 30
+  },
+  searchIcon: {
+    paddingLeft: 10,
+    flex: 0.15,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  input: {
+    flex: 1,
+    backgroundColor: "transparent",
+    color: "#424242"
+  },
+  setting: {
+    flex: 0.2,
+    alignItems: "center"
+  }
+});
 
 export default tabNavigation;

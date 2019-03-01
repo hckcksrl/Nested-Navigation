@@ -27,7 +27,7 @@ const PictureNavigation = createMaterialTopTabNavigator(
     }
   },
   {
-    tabBarPosition: "top",
+    tabBarPosition: "bottom",
     lazy: true,
     initialRouteName: "Camera",
     swipeEnabled: true,

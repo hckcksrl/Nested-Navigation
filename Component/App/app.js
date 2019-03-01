@@ -2,27 +2,25 @@ import React, { Component } from "react";
 import { View, StyleSheet, TextInput, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AppRootNavigator from "../Navigation/RootNavigation";
+import { NavigationActions } from "react-navigation";
 
 class AppContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      inputholder: null
+      inputholder: null,
+      naviProps: null
     };
   }
 
-  handleChange = state => {
+  handleChange = (state, props) => {
     this.setState({
-      inputholder: state
+      inputholder: state,
+      naviProps: props
     });
   };
 
-  componentWillMount() {
-    this.handleChange;
-  }
-
   render() {
-    console.log(this.state.inputholder);
     return (
       <SafeAreaView style={styles.container} forceInset={{ top: "never" }}>
         {this.state.inputholder === "Popular" ||
@@ -31,7 +29,14 @@ class AppContainer extends Component {
         this.state.inputholder === "Dictionary" ? (
           <View style={styles.header}>
             <View style={styles.icon}>
-              <Icon name="home" color="red" size={30} />
+              <Icon
+                name="home"
+                color="red"
+                size={30}
+                onPress={() => {
+                  this.state.naviProps.navigate("Popular");
+                }}
+              />
             </View>
             <View style={styles.searchSection}>
               <Icon style={styles.searchIcon} name="search" size={20} />
