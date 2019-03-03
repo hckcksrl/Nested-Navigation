@@ -1,6 +1,6 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AppContainer from "./Component/App/app";
 
@@ -45,11 +45,7 @@ export default class App extends React.Component {
       );
     }
 
-    return (
-      <View style={styles.container}>
-        <AppContainer />
-      </View>
-    );
+    return <AppContainer />;
   }
 }
 

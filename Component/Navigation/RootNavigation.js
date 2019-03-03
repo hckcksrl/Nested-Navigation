@@ -15,25 +15,48 @@ const RootNavigation = createStackNavigator(
     TakePhoto: {
       screen: PictureNavigation,
       navigationOptions: ({ navigation }) => ({
-        // headerLeft: (
-        //   <Icon
-        //     name="close"
-        //     color="black"
-        //     size={24}
-        //     onPress={() => {
-        //       navigation.goBack(null);
-        //     }}
-        //   />
-        // )
         headerBackTitle: true
       })
     }
   },
   {
-    mode: "modal"
+    mode: "card"
   }
 );
 
 const AppRootNavigator = createAppContainer(RootNavigation);
 
 export default AppRootNavigator;
+
+// createSwitchNavigator{
+//     SignedOut{
+//         SignIn
+//         SignOut
+//     }
+//     SignedIn{
+//         Tabs{
+//             Home{
+//                 Popular
+//                 Picture
+//                 Dictionary
+//                 Recent
+//             }
+//             MyPage{
+//                 Profile
+//                 Shop
+//             }
+//             Notificate{
+//                 Notification
+//                 Following
+//                 Event
+//             }
+//             Photo{
+//                 View
+//             }
+//         }
+//         TakePhoto{
+//             Camera
+//             Library
+//         }
+//     }
+// }
