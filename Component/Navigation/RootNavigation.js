@@ -1,32 +1,72 @@
-import React from "react";
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { Platform, StatusBar } from "react-native";
+import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import tabNavigation from "./AppNavigation";
 import PictureNavigation from "./PictureNavigation";
+import SignIn from "../../Route/Login/SignIn";
+import SignUp from "../../Route/Login/SignUp";
 
-const RootNavigation = createStackNavigator(
+const headerStyle = {
+  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+};
+
+export const SignedOut = createStackNavigator({
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: {
+      title: "Sign Up",
+      headerStyle
+    }
+  },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {
+      title: "Sign In",
+      headerStyle
+    }
+  }
+});
+
+export const SignedIn = createStackNavigator(
   {
     Tabs: {
       screen: tabNavigation,
-      navigationOptions: ({ navigation }) => ({
-        header: null
-      })
+      navigationOptions: {
+        header: null,
+        headerStyle
+      }
     },
     TakePhoto: {
       screen: PictureNavigation,
-      navigationOptions: ({ navigation }) => ({
-        headerBackTitle: true
-      })
+      navigationOptions: {
+        title: "Photo",
+        headerStyle
+      }
     }
   },
   {
-    mode: "card"
+    tabBarOptions: {
+      style: {
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+      }
+    }
   }
 );
 
-const AppRootNavigator = createAppContainer(RootNavigation);
-
-export default AppRootNavigator;
+export const createRootNavigator = (signedIn = false) => {
+  return createSwitchNavigator(
+    {
+      SignedIn: {
+        screen: SignedIn
+      },
+      SignedOut: {
+        screen: SignedOut
+      }
+    },
+    {
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+    }
+  );
+};
 
 // createSwitchNavigator{
 //     SignedOut{
