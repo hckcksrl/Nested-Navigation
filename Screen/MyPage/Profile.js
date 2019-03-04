@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 import PropTypes from "prop-types";
 import { withNavigationFocus } from "react-navigation";
+import { onSignOut } from "../../Component/App/auth";
 
 class Profile extends Component {
   componentDidUpdate() {
@@ -14,7 +16,13 @@ class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>프로필</Text>
+        <Button
+          backgroundColor="#03A9F4"
+          title="SIGN OUT"
+          onPress={() =>
+            onSignOut().then(() => this.props.navigation.navigate("SignedOut"))
+          }
+        />
       </View>
     );
   }
