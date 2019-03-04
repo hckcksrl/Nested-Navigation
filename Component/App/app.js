@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TextInput, SafeAreaView } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import AppRootNavigator from "../Navigation/RootNavigation";
-import { createRootNavigator } from "./route";
+import { SafeAreaView } from "react-native";
 import { isSignedIn } from "./auth";
 import { createAppContainer } from "react-navigation";
+import { createRootNavigator } from "../Navigation/RootNavigation";
 
 class AppContainer extends Component {
   constructor(props) {
@@ -21,6 +19,7 @@ class AppContainer extends Component {
     //   naviProps: props
     // });
   };
+
   componentDidMount() {
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
@@ -37,51 +36,13 @@ class AppContainer extends Component {
 
     const Layout = createRootNavigator(signedIn);
     const AppNavigation = createAppContainer(Layout);
-    return <AppNavigation screenProps={this.handleChange} />;
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <AppNavigation screenProps={this.handleChange} />
+      </SafeAreaView>
+    );
   }
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "white"
-//   },
-//   header: {
-//     flex: 0.1,
-//     flexDirection: "row",
-//     justifyContent: "flex-start",
-//     alignItems: "center"
-//   },
-//   icon: {
-//     flex: 0.2,
-//     alignItems: "center",
-//     justifyContent: "center"
-//   },
-//   searchSection: {
-//     flex: 1,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "#e5e5e5",
-//     borderRadius: 10,
-//     height: 30
-//   },
-//   searchIcon: {
-//     paddingLeft: 10,
-//     flex: 0.15,
-//     justifyContent: "center",
-//     alignItems: "center"
-//   },
-//   input: {
-//     flex: 1,
-//     backgroundColor: "transparent",
-//     color: "#424242"
-//   },
-//   setting: {
-//     flex: 0.2,
-//     alignItems: "center"
-//   }
-// });
 
 export default AppContainer;
 
