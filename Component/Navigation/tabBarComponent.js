@@ -1,103 +1,75 @@
 import React, { Component } from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  TouchableWithoutFeedback
-} from "react-native";
+import { View, Text, Dimensions, StyleSheet, TextInput } from "react-native";
 import PropTypes from "prop-types";
+import TabBarHeader from "./tabBarHeader";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class TabBarComponent extends Component {
   render() {
-    const { routes, index } = this.props.navigation.state;
-    return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.scrollContainer}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainer}
-        >
-          {routes.map((route, key) => {
-            const color =
-              index === key ? styles.activeTintColor : styles.inactiveTintColor;
-            const indicateColor =
-              index === key
-                ? styles.activeindicateColor
-                : styles.inactiveindicateColor;
-
-            return (
-              <View style={styles.tabView} key={key}>
-                <TouchableWithoutFeedback
-                  onPress={() =>
-                    this.props.navigation.navigate(`${route.routeName}`)
-                  }
-                >
-                  <View
-                    style={{
-                      flex: 1,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      paddingHorizontal: 10
-                    }}
-                  >
-                    <Text style={color}>{route.routeName}</Text>
-                  </View>
-                </TouchableWithoutFeedback>
-                <View
-                  style={{
-                    flex: 0.1,
-                    flexDirection: "row"
-                  }}
-                >
-                  <View style={indicateColor} />
-                </View>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-    );
+    const { key } = this.props.navigation.state;
+    if (key === "Home") {
+      return (
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.icon}>
+              <Icon name="home" color="red" size={30} />
+            </View>
+            <View style={styles.section}>
+              <Icon style={styles.textIcon} name="search" size={20} />
+              <TextInput style={styles.textinput} placeholder="검색" />
+            </View>
+            <View style={styles.setting}>
+              <Icon name="settings" size={30} color="grey" />
+            </View>
+          </View>
+          <TabBarHeader {...this.props} />
+        </View>
+      );
+    } else {
+      return <TabBarComponent {...this.props} />;
+    }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get("window").height / 14,
-    borderBottomWidth: 1,
-    justifyContent: "space-between",
-    borderBottomColor: "#efefef"
+    height: Dimensions.get("window").height / 7,
+    justifyContent: "space-between"
   },
-  scrollContainer: {
+  header: {
     flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center",
     flexDirection: "row"
   },
-  contentContainer: {
+  section: {
     flex: 1,
-    justifyContent: "space-evenly"
-  },
-  tabView: {
-    alignItems: "center",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
+    backgroundColor: "#e5e5e5",
+    borderRadius: 10,
+    height: 30
   },
-  activeTintColor: {
-    color: "red"
+  icon: {
+    flex: 0.2,
+    alignItems: "center",
+    justifyContent: "center"
   },
-  inactiveTintColor: {
-    color: "black"
+  textIcon: {
+    paddingLeft: 10,
+    flex: 0.15,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  activeindicateColor: {
+  textinput: {
     flex: 1,
-    backgroundColor: "red",
-    paddingHorizontal: 5
+    backgroundColor: "transparent",
+    color: "#424242"
   },
-  inactiveindicateColor: {
-    flex: 1,
-    paddingHorizontal: 5
+  setting: {
+    flex: 0.2,
+    alignItems: "center"
   }
 });
 
